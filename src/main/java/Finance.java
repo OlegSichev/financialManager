@@ -13,7 +13,7 @@ public class Finance {
     private int addCashDeposits = 0; //ежемесячный платеж в копилку
     private String dateRegistrationFinance = null; //дата создания бюджета в программе
 
-    private Finance(int totalBudgetToday, int totalCashDeposits, int salaryOfMonth, int otherIncome, int totalCredit, int creditOfMonth, int addCashDeposits){
+    private Finance(int totalBudgetToday, int totalCashDeposits, int salaryOfMonth, int otherIncome, int totalCredit, int creditOfMonth, int addCashDeposits) {
         this.totalBudgetToday = totalBudgetToday;
         this.totalCashDeposits = totalCashDeposits;
         this.salaryOfMonth = salaryOfMonth;
@@ -25,7 +25,40 @@ public class Finance {
         this.dateRegistrationFinance = String.valueOf(LocalDate.now());
     }
 
-    public static Finance addFinance(){
+    public int getTotalBudgetToday() {
+        return totalBudgetToday;
+    }
+
+    public int getTotalCredit() {
+        return totalCredit;
+    }
+
+    public int getCreditOfMonth() {
+        return creditOfMonth;
+    }
+
+    public int getAddCashDeposits() {
+        return addCashDeposits;
+    }
+
+    public int getTotalCashDeposits() {
+        return totalCashDeposits;
+    }
+
+    public int getOtherIncome() {
+        return otherIncome;
+    }
+
+    public int getSalaryOfMonth() {
+        return salaryOfMonth;
+    }
+
+    public String getDateRegistrationFinance() {
+        return dateRegistrationFinance;
+    }
+
+
+    public static User addFinance(String name) {
         System.out.println("Введите сумму имеющуюся на руках сегодня (Ваш бюджет)");
         int totalBudgetToday = scanInt.nextInt();
         System.out.println("Введите сумму денег, которая находится в вашей копилке (Отложена на лучшую жизнь)");
@@ -40,7 +73,10 @@ public class Finance {
         int creditOfMonth = scanInt.nextInt();
         System.out.println("Введите сумму, которую вы планируете ежемесячно откладывать в копилку (на будущее):");
         int cashDeposits = scanInt.nextInt();
-        return new Finance(totalBudgetToday, totalCashDeposits, salaryOfMonth, otherIncome, totalCredit, creditOfMonth, cashDeposits);
+        User user = new User(name, new Finance(totalBudgetToday, totalCashDeposits, salaryOfMonth, otherIncome,
+                totalCredit, creditOfMonth, cashDeposits));
+        User.users.add(user);
+        return user;
     }
 
     @Override
